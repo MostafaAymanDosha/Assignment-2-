@@ -1,0 +1,180 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+private: int nodeData;
+
+public:
+    int Value;
+    
+    Node(int data)
+    {
+        nodeData = data;
+        Value = data;
+    }
+
+    Node* Next;
+};
+
+class LinkedList
+{
+    Node* Head = NULL;
+    Node* Tail = NULL;
+    int numHolder;
+    int size;
+
+public:
+    void InsertFromTheEnd(int data)
+    {
+        Node* newNode = new Node(data);
+
+        if (isEmpty())
+        {
+            Head = Tail = newNode;
+
+            Tail->Next = NULL;
+        }
+
+        else
+        {
+            Tail->Next = newNode;
+            Tail = Tail->Next;
+
+            Tail->Next = NULL;
+        }
+
+        numHolder = Tail->Value;
+        size++;
+    }
+
+    int RemoveFromTheEnd()
+    {
+        if (isEmpty())
+        {
+            cout << "Linked-List is empty";
+        }
+
+        else if(size == 1)
+        {
+            numHolder = Tail->Value;
+            Head = Tail = NULL;
+            size--;
+        }
+
+        else
+        {
+            Node* c = Head;
+            while (c->Next->Next != NULL)
+            {
+                c = c->Next;
+            }
+
+            numHolder = c->Next->Value;
+            
+            c->Next = NULL;
+            Tail = c;
+
+            size--;
+        }
+        
+        return numHolder;
+    }
+
+    int LastNodeValue()
+    {
+        return numHolder = Tail->Value;
+    }
+
+    int Size()
+    {
+        return size;
+    }
+
+    bool isEmpty()
+    {
+        return (Head == NULL) && (Tail == NULL);
+    }
+};
+
+class StackWithLinkedList
+{
+    LinkedList list;
+
+public :
+    void Push(int item)
+    {
+        list.InsertFromTheEnd(item);
+    }
+
+    int Pop()
+    {
+        return list.RemoveFromTheEnd();
+    }
+
+    int Peek()
+    {
+        try
+        {
+            if (Size() == 0)
+                throw exception();
+
+            else
+                return list.LastNodeValue();
+        }
+        catch(exception x)
+        {
+            cout << "Stack is Empty !\n";
+        }
+    }
+
+    int Size()
+    {
+        return list.Size();
+    }
+
+    string IsEmpty()
+    {
+        if (Size() == 0)
+            return "True";
+
+        return "False";
+    }
+
+    string IsFull()
+    {
+        if (Size() != 0)
+            return "True";
+
+        return "False";
+    }
+};
+
+int main()
+{
+    StackWithLinkedList stack;
+
+    stack.Push(10);
+    stack.Push(20);
+    stack.Push(30);
+
+    stack.Pop();
+    cout << stack.Peek();
+
+    stack.Pop();
+    cout << stack.Peek();
+
+    stack.Pop();
+
+    cout << "\n";
+
+    stack.Peek();
+    
+    cout << "Size of stack : " << stack.Size() << "\n";
+
+    cout << "IsEmpty : " << stack.IsEmpty() << "\n\n";
+
+    cout << "IsFull : " << stack.IsFull();
+
+    cout << "\n\n\t\tCoded By : Mostafa Ayman Farouk" << "\n\n";
+}
