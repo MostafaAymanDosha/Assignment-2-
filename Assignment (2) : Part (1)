@@ -158,15 +158,15 @@ int main()
     stack.Push(20);
     stack.Push(30);
 
-    stack.Pop();
-    cout << stack.Peek();
+    cout << "Peek() : " << stack.Peek() << "\n";
 
     stack.Pop();
-    cout << stack.Peek();
+    cout << "Peek() : " << stack.Peek() << "\n";
 
     stack.Pop();
+    cout << "Peek() : " << stack.Peek() << "\n";
 
-    cout << "\n";
+    stack.Pop();
 
     stack.Peek();
     
